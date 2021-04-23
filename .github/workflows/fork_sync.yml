@@ -10,9 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: tgymnich/fork-sync@v1.4
+      - uses: tgymnich/fork-sync@v1.3
         with:
-          token: ${{ secrets.AUTO_APPROVE }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.AUTO_APPROVE }}
           owner: RSS-Bridge
           base: master
           head: master

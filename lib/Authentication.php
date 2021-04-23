@@ -64,15 +64,21 @@ class Authentication {
 
 	/**
 	 * Verifies if an authentication request was received and compares the
-	 * provided username and password to the configuration of RSS-Bridge
-	 * (`[authentication] username` and `[authentication] password`).
+	 * provided username and password either to the configuration of RSS-Bridge
+	 * (`[authentication] username` and `[authentication] password`) or to
+	 * 'AUTH_USER' and 'AUTH_PSW' environment variables if 'from_env' is set.
 	 *
 	 * @return bool True if authentication succeeded.
 	 */
 	public static function verifyPrompt() {
-
 		if(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
-			if(Configuration::getConfig('authentication', 'username') === $_SERVER['PHP_AUTH_USER']
+			if(Configuration::getConfing( 'authentication', 'from_env' )) {
+				if(getenv('AUTH_USER') === $_SERVER['PHP_AUTH_USER'] && getenv('AUTH_PSW') === $_SERVER['PHP_AUTH_PW']) {
+					return true;
+				} else {
+					error_log('[RSS-Bridge] Failed authentication attempt from ' . $_SERVER['REMOTE_ADDR']);
+				}
+			} elseif(Configuration::getConfig( 'authentication', 'username') === $_SERVER['PHP_AUTH_USER']
 				&& Configuration::getConfig('authentication', 'password') === $_SERVER['PHP_AUTH_PW']) {
 				return true;
 			} else {
