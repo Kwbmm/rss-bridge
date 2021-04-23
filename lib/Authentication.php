@@ -72,7 +72,7 @@ class Authentication {
 	 */
 	public static function verifyPrompt() {
 		if(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
-			if(Configuration::getConfing( 'authentication', 'from_env' )) {
+			if(Configuration::getConfig( 'authentication', 'from_env' )) {
 				if(getenv('AUTH_USER') === $_SERVER['PHP_AUTH_USER'] && getenv('AUTH_PSW') === $_SERVER['PHP_AUTH_PW']) {
 					return true;
 				} else {
