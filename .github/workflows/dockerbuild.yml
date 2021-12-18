@@ -8,8 +8,8 @@ on:
       - '20*'
 
 env:
-  DOCKERHUB_SLUG: rssbridge/rss-bridge
-  GHCR_SLUG: ghcr.io/rss-bridge/rss-bridge
+  DOCKERHUB_SLUG: kwbmm/rss-bridge
+  GHCR_SLUG: ghcr.io/Kwbmm/rss-bridge
 
 jobs:
   bake:
