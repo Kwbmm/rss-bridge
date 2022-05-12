@@ -227,6 +227,8 @@ pip-log.txt
 ##############
 /cache
 DEBUG
+config.ini.php
+config/*
 
 ######################
 ## VisualStudioCode ##
