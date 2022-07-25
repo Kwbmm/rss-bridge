@@ -24,7 +24,7 @@ final class ConfigurationTest extends TestCase
 
         // test real values
         $this->assertSame('file', Configuration::getConfig('cache', 'type'));
-        $this->assertSame(false, Configuration::getConfig('authentication', 'enable'));
+        $this->assertSame(true, Configuration::getConfig('authentication', 'enable'));
         $this->assertSame(true, Configuration::getConfig('admin', 'donations'));
         $this->assertSame(1, Configuration::getConfig('error', 'report_limit'));
     }
