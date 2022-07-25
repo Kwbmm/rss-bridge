@@ -75,7 +75,16 @@ class Authentication
     public static function verifyPrompt()
     {
         if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
-            if (
+            if (Configuration::getConfig('authentication', 'from_env')) {
+                if (
+                    getenv('AUTH_USER') === $_SERVER['PHP_AUTH_USER']
+                    && getenv('AUTH_PSW') === $_SERVER['PHP_AUTH_PW']
+                ) {
+					return true;
+				} else {
+					error_log('[RSS-Bridge] Failed authentication attempt from ' . $_SERVER['REMOTE_ADDR']);
+				}
+            } elseif (
                 Configuration::getConfig('authentication', 'username') === $_SERVER['PHP_AUTH_USER']
                 && Configuration::getConfig('authentication', 'password') === $_SERVER['PHP_AUTH_PW']
             ) {
