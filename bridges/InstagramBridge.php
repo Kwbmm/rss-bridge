@@ -84,8 +84,15 @@ class InstagramBridge extends BridgeAbstract
     protected function getContents($uri)
     {
         $headers = [];
-        $sessionId = $this->getOption('session_id');
-        $dsUserId = $this->getOption('ds_user_id');
+        $sessionId = null;
+        $dsUserId = null;
+        if (Configuration::getConfig('InstagramBridge', 'from_env')) {
+            $sessionId = getenv('INSTAGRAM_SESSION_ID');
+            $dsUserId = getenv('INSTAGRAM_DS_USER_ID');
+        } else {
+            $sessionId = $this->getOption('session_id');
+            $dsUserId = $this->getOption('ds_user_id');
+        }
         if ($sessionId and $dsUserId) {
             $headers[] = 'cookie: sessionid=' . $sessionId . '; ds_user_id=' . $dsUserId;
         }

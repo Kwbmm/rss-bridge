@@ -18,3 +18,6 @@ timezone = "Europe/Rome"
 ; false = disabled (default)
 enable = true
 from_env = true
+
+[InstagramBridge]
+from_env = true
