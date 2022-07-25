@@ -1,0 +1,20 @@
+name: Fork Sync 
+on:
+  schedule:
+    - cron: '0 7 */7 * *' # every 7 days at 7am 
+  workflow_dispatch: # on button click
+
+jobs:
+  sync:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: tgymnich/fork-sync@v1.6
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.AUTO_APPROVE }}
+          owner: RSS-Bridge
+          base: master
+          head: master
+          auto_approve: true
